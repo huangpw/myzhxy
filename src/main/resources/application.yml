@@ -1,0 +1,38 @@
+server:
+  port: 9001
+spring:
+  #解决SpringBoot2.6.0与swagger冲突问题【原因是在springboot2.6.0中将SpringMVC 默认路径匹配策略从AntPathMatcher 更改为PathPatternParser，导致出错，解决办法是切换回原先的AntPathMatcher】
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #配置数据源
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/zhxy_db?characterEncoding=utf-8&serverTimezone=GMT%2B8&userSSL=false
+    username: root
+    password: 123456
+    hikari: #配置Hikari连接池
+      connection-test-query: SELECT 1 # 连接测试查询
+      connection-timeout: 60000 # 连接超时时间
+      idle-timeout: 500000 # 空闲连接超时时间
+      max-lifetime: 540000 # 连接最大生命周期
+      maximum-pool-size: 20 # 连接池最大连接数
+      minimum-idle: 10 # 连接池最小空闲连接数
+      pool-name: GuliHikariPool # 连接池名称
+  thymeleaf: #配置thymeleaf
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+    prefix: classpath:/static/
+  jackson: #配置jackson
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet: #配置文件上传
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 100MB
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:/mapper/**/*.xml
