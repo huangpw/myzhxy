@@ -15,3 +15,9 @@
 ## 软件环境
 
 ![1001](/images/1646728754228.png)
+
+## 页面展示
+
+![1001](/images/xiaoyuan1002.png)
+
+![1001](/images/xiaoyuan1001.png)
